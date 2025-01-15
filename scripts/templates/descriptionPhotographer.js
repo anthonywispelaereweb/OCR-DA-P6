@@ -1,6 +1,6 @@
 function descriptionPhotographerTemplate(data) {
   console.log("🚀 ~ descriptionPhotographerTemplate ~ data:", data)
-  const { name, portrait, city, country, tagline } = data.photographer
+  const { name, portrait, city, country, tagline, price } = data.photographer
   const { medias } = data
   console.log("🚀 ~ descriptionPhotographerTemplate ~ medias:", medias)
 
@@ -59,5 +59,14 @@ function descriptionPhotographerTemplate(data) {
     })
     return mediaSection
   }
-  return { getDescriptionPhotographerCardDOM, getMediaPhotographerCardDom }
+  function getCounterMediaCardDom() {
+    const counterSection = document.createElement('section')
+    counterSection.classList.add('counter-ctn')
+    const mediaCounterModel = mediaTemplate(null, null, null, medias)
+    const counterMedia = mediaCounterModel.getCounterLikes(price)
+    counterSection.appendChild(counterMedia)
+    return counterSection
+  }
+
+  return { getDescriptionPhotographerCardDOM, getMediaPhotographerCardDom, getCounterMediaCardDom }
 }

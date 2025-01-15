@@ -150,6 +150,18 @@ h1 {
     align-items: center;
     gap: 5px;
 }
+.counter-ctn {
+    position: fixed;
+    bottom: 0;
+    right: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    padding: .5rem 1rem;
+    background-color: #DB8876;
+    border-radius: 5px 5px 0 0;
+}
 .lightbox {
     display: none;
 }

@@ -1,22 +1,20 @@
 //Mettre le code JavaScript lié à la page photographer.html
-async function getDescriptionPhotographer(id) {
-  let infoPhotographer = await getPhotographersAndMediaById('./data/photographers.json', id)
-  return infoPhotographer
-}
+const getDescriptionPhotographer = async (id)=> await getPhotographersAndMediaById('./data/photographers.json', id)
 
-async function displayDataDescription(photographerInfo) {
+const displayDataDescription = async photographerInfo => {
   const photographersHeader = document.querySelector('.photograph-header')
   const mediaSection = document.querySelector('.photograph-galery')
 
   const photographerDesriptionModel = descriptionPhotographerTemplate(photographerInfo)
   const userCardDOM = photographerDesriptionModel.getDescriptionPhotographerCardDOM()
   const mediaCardDOM = photographerDesriptionModel.getMediaPhotographerCardDom()
-    
+  const counter = photographerDesriptionModel.getCounterMediaCardDom()
   photographersHeader.appendChild(userCardDOM)
   mediaSection.appendChild(mediaCardDOM)
+  document.body.appendChild(counter)
 }
 
-async function init() {
+const init = async () => {
   // Récupère l'id du photographe
   const idPhotographer = new URLSearchParams(window.location.search).get('id')
   const globalInfo = await getDescriptionPhotographer(idPhotographer)

@@ -1,7 +1,8 @@
 function mediaTemplate(data, name, indexElt, medias) {
-  const { image, likes, date, id, photographerId } = data
+  
 
-  function getMediaCardDOM() {
+  const getMediaCardDOM = () => {
+    const { image, likes, date, id, photographerId, video } = data
     const card = document.createElement('article')
     card.classList.add('galery-item')
     card.dataset.id = id
@@ -19,12 +20,12 @@ function mediaTemplate(data, name, indexElt, medias) {
       img.classList.add('galery-item-img')
       linkButton.appendChild(img)
     }
-    if (data.video) {
-      const video = document.createElement('video')
-      video.src = `/assets/images/${name}/${data.video}`
-      video.alt = `${name} - ${data.title}`
-      video.classList.add('galery-item-img')
-      linkButton.appendChild(video)
+    if (video) {
+      const videoElt = document.createElement('video')
+      videoElt.src = `/assets/images/${name}/${video}`
+      videoElt.alt = `${name} - ${data.title}`
+      videoElt.classList.add('galery-item-img')
+      linkButton.appendChild(videoElt)
     }
     linkButton.addEventListener('click', () => {
       console.log("🚀 ~ getMediaCardDOM ~ data:", data)
@@ -51,11 +52,14 @@ function mediaTemplate(data, name, indexElt, medias) {
     likesContainer.appendChild(likesNumber)
     likesContainer.appendChild(likesIcon)
     likesContainer.addEventListener('click', () => {
+      const globalLikesCounter = document.querySelector('.counter-likes')
       likesContainer.dataset.likes = likesContainer.dataset.likes === 'true' ? 'false' : 'true'
       likesIcon.classList = likesContainer.dataset.likes === 'true' ? 'fas fa-heart' : 'far fa-heart'
       if (likesContainer.dataset.likes === 'true') {
+        globalLikesCounter.textContent = parseInt(globalLikesCounter.textContent) + 1
         likesNumber.textContent = parseInt(likesNumber.textContent) + 1
       } else {
+        globalLikesCounter.textContent = parseInt(globalLikesCounter.textContent) - 1
         likesNumber.textContent = parseInt(likesNumber.textContent) - 1
       }   
     })
@@ -68,5 +72,18 @@ function mediaTemplate(data, name, indexElt, medias) {
     return card
   }
 
-  return { getMediaCardDOM }
+  const getCounterLikes = (price) => {
+    const likes = medias.reduce((acc, media) => acc + media.likes, 0)
+    const counter = document.createElement('div')
+    counter.classList.add('counter-ctn')
+    counter.innerHTML = `<div>
+      <span class="counter-likes">${likes}</span> 
+      <i class="fas fa-heart"></i>
+     </div>
+     <span>${price}€/jour` 
+    return counter
+  }
+  
+
+  return { getMediaCardDOM, getCounterLikes }
 }
