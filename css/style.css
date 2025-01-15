@@ -1,0 +1,155 @@
+@import url("photographer.css");
+
+body {
+    font-family: "DM Sans", sans-serif;
+    margin: 0;
+}
+
+
+header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 90px;
+}
+
+h1 {
+    color: #901C1C;
+    margin-right: 100px;
+}
+
+.logo {
+    height: 50px;
+    margin-left: 100px;
+}
+
+.photographer_section {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 70px;
+    margin-top: 100px;
+}
+
+.photographer_section article {
+    justify-self: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-family: 'DM Sans', sans-serif;
+}
+.global-section .div-left h2,
+.photographer_section article h2 {
+    color: #D3573C;
+    font-size: 36px;
+    line-height: 46px;
+    font-weight: 400;
+    margin-bottom: 10px;
+    text-align: center;
+}
+.global-section .div-left .adress,
+.photographer_section article .adress {
+    color: #901C1C;
+    margin-bottom: 3px;
+    font-size: 13px;
+    line-height: 17px;
+    font-weight: 400;
+    text-align: center;
+}
+.global-section .div-left .tagline,
+.photographer_section article .tagline {
+    color: #000;
+    margin-bottom: 3px;
+    font-size: 10px;
+    line-height: 13px;
+    font-weight: 400;
+    text-align: center;
+}
+
+.photographer_section article .price {
+    color: #757575;
+    margin-bottom: 3px;
+    font-size: 9px;
+    line-height: 11.7px;
+    font-weight: 400;
+    text-align: center;
+}
+
+.photographer_section article img {
+    height: 200px;
+    width: 200px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+.photographer_section article p {
+    margin: 0;
+}
+
+.global-section {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 56px 50px;
+}
+.global-section .div-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: baseline;
+    flex: 3;
+
+}
+.global-section .contact_button {
+    flex: 1;
+}
+
+.global-section .div-right {
+    display: flex;
+    justify-content: flex-end;
+    flex: 3;
+}
+.global-section .div-right img {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+.photograph-galery {
+    margin: 0 100px;
+}
+.galery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    margin-top: 100px;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+.galery-item {
+    width: calc(33.333% - 30px);
+    overflow: hidden;
+
+    
+}
+.galery-item-img  {
+    display: block;
+    width: 350px;
+    height: 350px;
+    /* max-height: 130px; */
+    object-fit: cover;
+}
+.galery-item-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #901C1C;
+}
+.galery-item-likes {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+.lightbox {
+    display: none;
+}
