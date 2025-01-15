@@ -1,8 +1,6 @@
 function descriptionPhotographerTemplate(data) {
-  console.log("🚀 ~ descriptionPhotographerTemplate ~ data:", data)
   const { name, portrait, city, country, tagline, price } = data.photographer
   const { medias } = data
-  console.log("🚀 ~ descriptionPhotographerTemplate ~ medias:", medias)
 
   const picture = `assets/photographers/${portrait}`
 

@@ -12,6 +12,7 @@ const displayDataDescription = async photographerInfo => {
   photographersHeader.appendChild(userCardDOM)
   mediaSection.appendChild(mediaCardDOM)
   document.body.appendChild(counter)
+  mediaSection.firstChild.focus()     
 }
 
 const init = async () => {

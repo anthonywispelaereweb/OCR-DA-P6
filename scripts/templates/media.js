@@ -2,7 +2,7 @@ function mediaTemplate(data, name, indexElt, medias) {
   
 
   const getMediaCardDOM = () => {
-    const { image, likes, date, id, photographerId, video } = data
+    const { image, likes, id, photographerId, video } = data
     const card = document.createElement('article')
     card.classList.add('galery-item')
     card.dataset.id = id
@@ -11,27 +11,29 @@ function mediaTemplate(data, name, indexElt, medias) {
     const linkButton = document.createElement('a')
     linkButton.classList.add('galery-item-link')
     linkButton.role ="button"
-    linkButton.setAttribute('title', data.title)
+    linkButton.title = data.title
+    linkButton.ariaLabel = data.title
+    linkButton.setAttribute('tabindex',   1)     
+    const pictureBase = `./assets/images/${name}/`
 
     if (image) {
       const img = document.createElement('img')
       img.alt = `${name} - ${data.title}`
-      img.src = `/assets/images/${name}/${image}`
+      img.src = `${pictureBase}${image}`
       img.classList.add('galery-item-img')
       linkButton.appendChild(img)
     }
     if (video) {
       const videoElt = document.createElement('video')
-      videoElt.src = `/assets/images/${name}/${video}`
+      videoElt.src = `${pictureBase}${video}`
       videoElt.alt = `${name} - ${data.title}`
       videoElt.classList.add('galery-item-img')
       linkButton.appendChild(videoElt)
     }
     linkButton.addEventListener('click', () => {
-      console.log("🚀 ~ getMediaCardDOM ~ data:", data)
-      console.log("🚀 ~ getMediaCardDOM ~ indexElt:", indexElt)
-      console.log("🚀 ~ getMediaCardDOM ~ medias:", medias)
-      console.log("🚀 ~ getMediaCardDOM ~ mediasIdx:", medias[indexElt])
+      const lightbox = document.querySelector('.lightbox')
+      lightbox.classList.toggle('hidden')
+      initLightbox(indexElt, medias, pictureBase)
     })
 
     const cardFooter = document.createElement('div')
