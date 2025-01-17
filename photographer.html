@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="fr">
   <head>
+    <link href="./css/loader.css" rel="stylesheet" type="text/css" />
     <link href="./css/style.css" rel="stylesheet" type="text/css" />
     <meta charset="utf-8" />
     <link rel="icon" type="image/png" href="./assets/favicon.png" />
@@ -16,7 +17,9 @@
   </head>
   <body>
     <header>
-      <img src="./assets/images/logo.png" class="logo" alt="Fisheye" />
+      <a href="./index.html">
+        <img src="./assets/images/logo.png" class="logo" alt="Fisheye" />
+      </a>
     </header>
     <main id="main">
       <div class="photograph-header"></div>
@@ -24,14 +27,14 @@
         <h3>Trier par </h3>
         <div class="dropdownMenu">
             <div class="dropdownMenu-header">
-                <a href="#" role="button" class="dropdownMenu-header-select" aria-controls="filterOptions" aria-haspopup="listbox" aria-label="Trier par">
+                <a href="" role="button" class="dropdownMenu-header-select" aria-controls="filterOptions" aria-haspopup="listbox" aria-label="Trier par">
                     <span>Popularité</span>
                     <i class="fa-solid fa-chevron-down"></i>
                 </a>
               </div>
               <div class="dropdownMenu-panel" role="listbox" id="filterOptions" aria-expanded="false">
-                  <a href="#" class="dropdownMenu-panel-option" data-value="likes" aria-selected="true" aria-label="Trier par popularité" role="option">Popularité</a>
-                  <a href="#" class="dropdownMenu-panel-option" data-value="title" aria-selected="false" aria-label="Trier par titre" role="option">Titre</a>
+                  <a href="" class="dropdownMenu-panel-option" data-value="likes" aria-selected="true" aria-label="Trier par popularité" role="option">Popularité</a>
+                  <a href="" class="dropdownMenu-panel-option" data-value="title" aria-selected="false" aria-label="Trier par titre" role="option">Titre</a>
               </div>
         </div>
     </section>
@@ -46,19 +49,19 @@
         <p class="name-photographer"></p>
         <form class="modal-form" id="contact">
           <label for="prenom">Prénom</label>
-          <input class="firstName-inp" id="prenom" type="text" name="first-Name" aria-label="Entrez votre prenom" aria-required="true">
-          <span class="message-alert">Vous devez entrer votre prénom !</span>
+          <input class="firstName-inp" id="prenom" type="text" name="first-name" aria-label="Entrez votre prenom" aria-required="true" min="2">
+          <span class="message-alert first-name-error">Vous devez entrer votre prénom !</span>
           <label for="nom">Nom</label>
-          <input class="lastName-inp" id="nom" type="text" name="last-Name" aria-label="Entrez votre nom" aria-required="true">
-          <span class=" message-alert">Vous devez entrer votre nom !</span>
+          <input class="lastName-inp" id="nom" type="text" name="last-name" aria-label="Entrez votre nom" aria-required="true" min="2">
+          <span class=" message-alert last-name-error">Vous devez entrer votre nom !</span>
           <label for="email">Email<br></label>
           <input class="email-inp" id="email" type="email" name="email" aria-label="entrez votre mail" aria-required="true">
-          <span class="message-alert">Vous devez entrer un Email valide !
+          <span class="message-alert email-error">Vous devez entrer un Email valide !
           </span>
           <label for="msg">Votre Message<br></label>
           <textarea class="msg-inp" id="msg" name="message" aria-required="true"></textarea>
-          <span class="message-alert">Votre devez entrer un message ! </span>
-          <button class="contact_button" type="submit" value="Envoyer" name="Email" aria-label="Envoyer le message">
+          <span class="message-alert message-error">Votre devez entrer un message ! </span>
+          <button class="contact_button" type="button" value="Envoyer" name="Email" aria-label="Envoyer le message">
               Envoyer
           </button>
         </form>
@@ -83,6 +86,10 @@
         </div>
       </div>
     </section>
+    <section class="loader-ctn">
+      <div class="loader"></div>
+    </section>
+    <script src="./scripts/utils/display.js"></script>
     <script src="./scripts/utils/api.js"></script>
     <script src="./scripts/templates/lightbox.js"></script>
     <script src="./scripts/templates/descriptionPhotographer.js"></script>

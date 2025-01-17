@@ -33,7 +33,7 @@ h1 {
 .photographer_section article {
   justify-self: center;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   flex-direction: column;
   font-family: 'DM Sans', sans-serif;
@@ -47,10 +47,20 @@ h1 {
   margin: 10px;
   text-align: center;
 }
+@media screen and (max-width: 64rem) {
+  .global-section .div-left h2,
+  .photographer_section article h2 {
+    font-size: 48px;
+    line-height: 64px;
+    font-weight: 400;
+    margin: 10px;
+    text-align: center;
+  }
+}
 .global-section .div-left .adress,
 .photographer_section article .adress {
   color: #901c1c;
-  margin: 0 0 19px 0;
+  margin: 0 0 10px 0;
   font-size: 13px;
   line-height: 17px;
   font-weight: 400;
@@ -63,7 +73,7 @@ h1 {
   line-height: 13px;
   font-weight: 400;
   text-align: center;
-  margin: 0 0 19px 0;
+  margin: 0 0 10px 0;
 
 }
 
@@ -225,6 +235,7 @@ h1 {
   border-radius: 0.6rem;
   background-color: white;
   overflow: hidden;
+  padding-left: 0;
 }
 .lightbox .lightbox-windows .container-slides .hidden {
   opacity: 0;
@@ -241,6 +252,7 @@ h1 {
   border-radius: 0.6rem;
   background-color: #868686;
   object-fit: cover;
+  object-position: 0% 15%;
 }
 
 .lightbox .lightbox-windows .container-slides video {
@@ -314,7 +326,7 @@ h1 {
 .lightbox .lightbox-windows .commandes button:nth-child(2) {
   top: 50%;
   transform: translateY(-50%);
-  right: 7%;
+  right: 9%;
   outline: none;
 }
 

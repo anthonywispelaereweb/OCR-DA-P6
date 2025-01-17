@@ -1,46 +1,15 @@
 //Mettre le code JavaScript lié à la page photographer.html
+
+// Get info of current photographer by Id
 const getDescriptionPhotographer = async id => await getPhotographersAndMediaById('./data/photographers.json', id)
 
-const changeSlide = async (infosP, list, direction = 'previous') => {
-  const medias = infosP.medias
-  const lightbox = document.querySelector('.lightbox')
-  const mediaTitleHTML = lightbox.querySelector('.titre-media-lightbox')
-  let currentMediaHTMLElement = list.querySelector(`.active`)
-  let currentMediaHTMLElementId = currentMediaHTMLElement.getAttribute('data-id')
-  let currentActiveSlide = medias.find(el => el.id === parseInt(currentMediaHTMLElementId))
-  let indexElt = medias.indexOf(currentActiveSlide)
-  currentMediaHTMLElement.classList.remove('active')
-  currentMediaHTMLElement.classList.add('hidden')
-  let newSlideId = null
-  if (indexElt === 0 && direction === 'previous') {
-    indexElt = medias.length - 1
-    newSlideId = medias[indexElt].id
-  } else if (indexElt !== 0 && direction === 'previous') {
-    indexElt--
-    newSlideId = medias[indexElt].id
-  } else if (indexElt === medias.length - 1 && direction !== 'previous') {
-    indexElt = 0
-    newSlideId = medias[indexElt].id
-  } else {
-    indexElt++
-    newSlideId = medias[indexElt].id
-  }
-
-  let newSlide = list.querySelector(`[data-id="${newSlideId}"]`)
-  mediaTitleHTML.textContent = medias[indexElt].title
-  newSlide.classList.remove('hidden')
-  newSlide.classList.add('active')
-  if (newSlide.tagName === 'VIDEO') {
-    newSlide.play()
-  }
-}
-
-const initSortEvent = async (infoGlobal, idPhotographer) => {
+const initSortEvent = async (infoGlobal) => {
   const selector = document.querySelector('.dropdownMenu-header-select')
   const panel = document.querySelector('.dropdownMenu-panel')
   const dropdownHeader = document.querySelector('.dropdownMenu-header')
   const options = document.querySelectorAll('.dropdownMenu-panel-option')
-
+  
+  // Add event to update the selection
   selector.addEventListener('click', e => {
     panel.classList.toggle('open')
     dropdownHeader.classList.toggle('open')
@@ -49,8 +18,10 @@ const initSortEvent = async (infoGlobal, idPhotographer) => {
     } else {
       panel.setAttribute('aria-expanded', true)
     }
-
+    // Fix width of panel
     panel.style.width = `${dropdownHeader.getBoundingClientRect().width}px`
+
+    // Add event option to set new filter
     options.forEach(option => {
       option.addEventListener('click', e => {
         let sortByValue = e.target.getAttribute('data-value')
@@ -59,12 +30,13 @@ const initSortEvent = async (infoGlobal, idPhotographer) => {
         dropdownHeader.classList.remove('open')
         panel.classList.remove('open')
 
-        const newSortedMadias = sortMediasBy(infoGlobal, sortByValue)
+        const newSortedMadias = sortMedias(infoGlobal, sortByValue)
         updateMedias(newSortedMadias)
       })
     })
   })
 }
+
 const updateMedias = medias => {
   const mediaSection = document.querySelector('.photograph-galery')
   mediaSection.innerHTML = ''
@@ -73,53 +45,15 @@ const updateMedias = medias => {
   mediaSection.appendChild(newMediaCardDOM)
 }
 
-const initEventLightBox = (infosP, idP) => {
-  const lightbox = document.querySelector('.lightbox')
-
-  const previous = lightbox.querySelector('.left')
-  const next = lightbox.querySelector('.right')
-  const list = lightbox.querySelector('.container-slides')
-  const close = lightbox.querySelector('.close-lightbox-media')
-
-  previous.addEventListener('click', () => {
-    changeSlide(infosP, list)
-  })
-  next.addEventListener('click', () => {
-    changeSlide(infosP, list, 'next')
-  })
-  close.addEventListener('click', () => {
-    lightbox.classList.add('hidden')
-    list.innerHTML = ''
-  })
-
-  const switchEvent = (infosP, e) => {
-    switch (e.code) {
-      case 'ArrowLeft':
-      case 'ArrowDown':
-        changeSlide(infosP, list)
-        break
-      case 'ArrowRight':
-      case 'ArrowUp':
-        changeSlide(infosP, list, 'next')
-        break
-      case 'Escape':
-        lightbox.classList.add('hidden')
-        list.innerHTML = ''
-        break
-      default:
-        break
-    }
-  }
-  lightbox.addEventListener('keydown', e => {
-    switchEvent(infosP, e)
-  })
-}
-
 const displayDataDescription = (photographerInfo, idUser) => {
   const photographersHeader = document.querySelector('.photograph-header')
   const mediaSection = document.querySelector('.photograph-galery')
 
   const photographerDesriptionModel = descriptionPhotographerTemplate(photographerInfo)
+  if (!photographerDesriptionModel) {
+    displayMessage('Aucun photographe trouvé', '#main')
+    return
+  } 
   const userDescriptionCardDOM = photographerDesriptionModel.getDescriptionPhotographerCardDOM()
   const mediaCardDOM = photographerDesriptionModel.getMediaPhotographerCardDom()
   const counter = photographerDesriptionModel.getCounterMediaCardDom()
@@ -128,11 +62,11 @@ const displayDataDescription = (photographerInfo, idUser) => {
   document.body.appendChild(counter)
   mediaSection.firstChild.focus()
 
-  initEventLightBox(photographerInfo, idUser)
-  initSortEvent(photographerInfo, idUser)
+  photographerDesriptionModel.initEventLightBox(photographerInfo)
+  initSortEvent(photographerInfo)
 }
 
-const sortMediasBy = (infos, sortedBy = 'likes') => {
+const sortMedias = (infos, sortedBy = 'likes') => {
   return {
     ...infos,
     medias: infos.medias.sort((a, b) => (a[sortedBy] > b[sortedBy] ? 1 : -1))
@@ -140,12 +74,17 @@ const sortMediasBy = (infos, sortedBy = 'likes') => {
 }
 
 const init = async () => {
-  // Récupère l'id du photographe
+  // Get photograph id
   const idPhotographer = new URLSearchParams(window.location.search).get('id')
   const globalInfo = await getDescriptionPhotographer(idPhotographer)
-  const sortedMadias = sortMediasBy(globalInfo)
+  if(globalInfo) {
+    const sortedMadias = sortMedias(globalInfo)
+    await displayDataDescription(sortedMadias, idPhotographer)
 
-  await displayDataDescription(sortedMadias, idPhotographer)
+    hideLoader()
+  } else {
+    console.log("🚀 ~ init error ~ globalInfo:", globalInfo)
+  }
 }
 
 init()

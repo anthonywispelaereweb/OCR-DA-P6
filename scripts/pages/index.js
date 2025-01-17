@@ -19,6 +19,10 @@ async function init() {
   // Récupère les datas des photographes
   const { photographers } = await getPhotographers()
   displayData(photographers)
+
+  setTimeout(() => {
+    hideLoader()
+  }, 2000)
 }
 
 init()
