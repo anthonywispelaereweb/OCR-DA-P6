@@ -44,15 +44,15 @@
       <div class="modal">
         <header>
           <h2>Contactez-moi</h2>
-          <img src="./assets/icons/close.svg" onclick="closeModal()" alt="fermer" />
+          <img src="./assets/icons/close.svg" id="closeModal" alt="fermer" />
         </header>
         <p class="name-photographer"></p>
         <form class="modal-form" id="contact">
           <label for="prenom">Prénom</label>
-          <input class="firstName-inp" id="prenom" type="text" name="first-name" aria-label="Entrez votre prenom" aria-required="true" min="2">
+          <input class="firstName-inp" id="prenom" type="text" name="first-name" aria-label="Entrez votre prenom" aria-required="true">
           <span class="message-alert first-name-error">Vous devez entrer votre prénom !</span>
           <label for="nom">Nom</label>
-          <input class="lastName-inp" id="nom" type="text" name="last-name" aria-label="Entrez votre nom" aria-required="true" min="2">
+          <input class="lastName-inp" id="nom" type="text" name="last-name" aria-label="Entrez votre nom" aria-required="true">
           <span class=" message-alert last-name-error">Vous devez entrer votre nom !</span>
           <label for="email">Email<br></label>
           <input class="email-inp" id="email" type="email" name="email" aria-label="entrez votre mail" aria-required="true">

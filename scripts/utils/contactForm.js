@@ -11,11 +11,18 @@ const closeModal = () => {
   const modal = document.querySelector('.contact_modal')
   modal.classList.add('hidden')
   modal.classList.remove('active')
+  form.reset()
 }
 
 const form = document.querySelector('#contact')
 const formSend = document.querySelector('.contact_button')
+const closeBtn = document.querySelector('#closeModal')
+closeBtn.addEventListener('click', closeModal)
 
+form.addEventListener('keydown', (e) => {
+  if (e.code === 'Escape') closeModal()
+})
+ 
 const isValidInput = (name, value) => {
   let isValid = false
   switch (name) {
