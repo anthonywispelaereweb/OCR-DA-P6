@@ -47,7 +47,7 @@ function mediaTemplate(data, name, indexElt, medias) {
     likesContainer.dataset.likes = false
     const likesIcon = document.createElement('i')
     let localSessionLikes = JSON.parse(localStorage.getItem('likes')) ?? []
-    let isExist = localSessionLikes.find(el => el.name === name && el.id.includes(id))
+    let isExist = localSessionLikes.find(el => el?.name === name && el?.id.includes(id))
 
     isExist 
       ? likesContainer.dataset.likes = 'true' 
@@ -100,7 +100,7 @@ function mediaTemplate(data, name, indexElt, medias) {
     counter.classList.add('counter-ctn')
     let localSessionLikes = JSON.parse(localStorage.getItem('likes')) ?? []
     let isExist = localSessionLikes.find(el => el.name === name)
-    let countLocalSessionLikes = isExist.id.length
+    let countLocalSessionLikes = isExist?.id.length ?? 0
     counter.innerHTML = `<div>
       <span class="counter-likes">${likes + countLocalSessionLikes}</span> 
       <i class="fas fa-heart"></i>
