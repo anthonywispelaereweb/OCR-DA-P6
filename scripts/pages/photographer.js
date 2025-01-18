@@ -27,7 +27,13 @@ const initSortEvent = async (infoGlobal) => {
       option.addEventListener('click', e => {
         e.preventDefault()
         let sortByValue = e.target.getAttribute('data-value')
+        // update selector
         selector.querySelector('span').textContent = e.target.textContent
+        // update aria-selected
+        let currentSelectedOption = panel.querySelector('[aria-selected="true"]')
+        currentSelectedOption.setAttribute('aria-selected', false)
+        e.target.setAttribute('aria-selected', true)
+        // update aria-expanded
         panel.setAttribute('aria-expanded', false)
         dropdownHeader.classList.remove('open')
         panel.classList.remove('open')
