@@ -15,20 +15,12 @@ function mediaTemplate(data, name, indexElt, medias) {
     linkButton.setAttribute('tabindex',   1)     
     const pictureBase = `./assets/images/${name}/`
 
-    if (image) {
-      const img = document.createElement('img')
-      img.alt = `${name} - ${data.title}`
-      img.src = `${pictureBase}${image}`
-      img.classList.add('galery-item-img')
-      linkButton.appendChild(img)
-    }
-    if (video) {
-      const videoElt = document.createElement('video')
-      videoElt.src = `${pictureBase}${video}`
-      videoElt.alt = `${name} - ${data.title}`
-      videoElt.classList.add('galery-item-img')
-      linkButton.appendChild(videoElt)
-    }
+    const supportMedia = document.createElement( image ? 'img' : 'video')
+    supportMedia.src = `${pictureBase}${image ?? video}`
+    supportMedia.alt = `${name} - ${data.title}`
+    supportMedia.classList.add('galery-item-img')
+    linkButton.appendChild(supportMedia)
+
     linkButton.addEventListener('click', () => {
       const lightbox = document.querySelector('.lightbox')
       lightbox.classList.toggle('hidden')
