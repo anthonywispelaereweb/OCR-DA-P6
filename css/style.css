@@ -354,12 +354,13 @@ h1 {
   flex-direction: column;
   background: #901C1C;
   position: relative;
-
+  height: fit-content;
 }
 
 .filter .dropdownMenu-header {
   display: flex;
   flex-direction: column;
+  align-content: center;
 }
 .filter .dropdownMenu-header-select .fa-chevron-down {
   transform: rotate(0);
@@ -379,6 +380,10 @@ h1 {
   gap: 1rem;
   padding: 1rem;
   min-width: 155px;
+  background: #901C1C;
+  cursor: pointer;
+  border: none;
+
 } 
 .filter .dropdownMenu-panel {
   display: flex;
