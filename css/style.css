@@ -4,6 +4,11 @@ body {
   font-family: 'DM Sans', sans-serif;
   margin: 0;
 }
+header,
+main {
+  max-width: 1690px; /*  equal 4 galery item + 3 gap de 30px + 200px de margin */
+  margin: auto;
+}
 
 header {
   display: flex;

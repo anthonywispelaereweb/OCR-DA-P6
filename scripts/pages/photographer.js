@@ -11,6 +11,7 @@ const initSortEvent = async (infoGlobal) => {
   
   // Add event to update the selection
   selector.addEventListener('click', e => {
+    e.preventDefault()
     panel.classList.toggle('open')
     dropdownHeader.classList.toggle('open')
     if (panel.getAttribute('aria-expanded') === 'true') {
@@ -24,6 +25,7 @@ const initSortEvent = async (infoGlobal) => {
     // Add event option to set new filter
     options.forEach(option => {
       option.addEventListener('click', e => {
+        e.preventDefault()
         let sortByValue = e.target.getAttribute('data-value')
         selector.querySelector('span').textContent = e.target.textContent
         panel.setAttribute('aria-expanded', false)
