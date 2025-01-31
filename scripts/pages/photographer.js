@@ -1,14 +1,20 @@
-//Mettre le code JavaScript lié à la page photographer.html
-
 // Get info of current photographer by Id
 const getDescriptionPhotographer = async id => await getPhotographersAndMediaById('./data/photographers.json', id)
 
-const initSortEvent = async (infoGlobal) => {
-  const selector = document.querySelector('.dropdownMenu-header-select')
-  const panel = document.querySelector('.dropdownMenu-panel')
-  const dropdownHeader = document.querySelector('.dropdownMenu-header')
-  const options = document.querySelectorAll('.dropdownMenu-panel-option')
-  
+// Init behavior focus selector
+let focusableSelectorFilter = '.dropdownMenu-panel-option'
+let focusablesFilter = []
+
+const initFocusFilter = e => {
+  if (e.code === 'Enter') e.target.click()
+}
+
+const initSortEvent = async infoGlobal => {
+  const selector = document.querySelector('.dropdownMenu-header-select'),
+    panel = document.querySelector('.dropdownMenu-panel'),
+    dropdownHeader = document.querySelector('.dropdownMenu-header'),
+    options = document.querySelectorAll('.dropdownMenu-panel-option')
+
   // Add event to update the selection
   selector.addEventListener('click', e => {
     e.preventDefault()
@@ -42,6 +48,10 @@ const initSortEvent = async (infoGlobal) => {
         updateMedias(newSortedMadias)
       })
     })
+
+    panel.addEventListener('keydown', e => {
+      if (e.code === 'Tab' || e.code === 'Enter') initFocusFilter(e)
+    })
   })
 }
 
@@ -61,7 +71,7 @@ const displayDataDescription = (photographerInfo, idUser) => {
   if (!photographerDesriptionModel) {
     displayMessage('Aucun photographe trouvé', '#main')
     return
-  } 
+  }
   const userDescriptionCardDOM = photographerDesriptionModel.getDescriptionPhotographerCardDOM()
   const mediaCardDOM = photographerDesriptionModel.getMediaPhotographerCardDom()
   const counter = photographerDesriptionModel.getCounterMediaCardDom()
@@ -85,13 +95,16 @@ const init = async () => {
   // Get photograph id
   const idPhotographer = new URLSearchParams(window.location.search).get('id')
   const globalInfo = await getDescriptionPhotographer(idPhotographer)
-  if(globalInfo) {
+  if (globalInfo) {
     const sortedMadias = sortMedias(globalInfo)
-    await displayDataDescription(sortedMadias, idPhotographer)
+    displayDataDescription(sortedMadias, idPhotographer)
 
     hideLoader()
+    // Add focus on first article
+    const firstArticles = document.querySelector('.galery .galery-item-link')
+    if (firstArticles) firstArticles.focus()
   } else {
-    console.log("🚀 ~ init error ~ globalInfo:", globalInfo)
+    console.log('🚀 ~ init error ~ globalInfo:', globalInfo)
   }
 }
 

@@ -94,6 +94,8 @@ const descriptionPhotographerTemplate = data => {
   }
 
   const switchEvent = (infosP, e) => {
+    const lightbox = document.querySelector('.lightbox'),
+      list = lightbox.querySelector('.container-slides')
     switch (e.code) {
       case 'ArrowLeft':
       case 'ArrowDown':
@@ -106,31 +108,37 @@ const descriptionPhotographerTemplate = data => {
       case 'Escape':
         lightbox.classList.add('hidden')
         list.innerHTML = ''
+        // Add focus on first article
+        const firstArticles = document.querySelector('.galery .galery-item-link')
+        if (firstArticles) firstArticles.focus()
         break
       default:
         break
     }
   }
-  
+
   const initEventLightBox = infosP => {
     const lightbox = document.querySelector('.lightbox'),
-          previous = lightbox.querySelector('.left'),
-          next = lightbox.querySelector('.right'),
-          list = lightbox.querySelector('.container-slides'),
-          close = lightbox.querySelector('.close-lightbox-media');
+      previous = lightbox.querySelector('.left'),
+      next = lightbox.querySelector('.right'),
+      list = lightbox.querySelector('.container-slides'),
+      close = lightbox.querySelector('.close-lightbox-media')
 
     previous.addEventListener('click', () => {
       changeSlide(infosP.medias)
-    });
+    })
 
     next.addEventListener('click', () => {
-      changeSlide(infosP.medias, 'next');
-    });
+      changeSlide(infosP.medias, 'next')
+    })
 
     close.addEventListener('click', () => {
-      lightbox.classList.add('hidden');
+      lightbox.classList.add('hidden')
       list.innerHTML = ''
-    });
+      // Add focus on first article
+      const firstArticles = document.querySelector('.galery .galery-item-link')
+      if (firstArticles) firstArticles.focus()
+    })
 
     lightbox.addEventListener('keydown', e => {
       switchEvent(infosP.medias, e)

@@ -1,7 +1,7 @@
 async function getPhotographers() {
-  let photographers = await  getData('./data/photographers.json')
+  let photographers = await getData('./data/photographers.json')
   return {
-    photographers: [ ...photographers.photographers ]
+    photographers: [...photographers.photographers]
   }
 }
 
@@ -16,10 +16,10 @@ async function displayData(photographers) {
 }
 
 async function init() {
-  // Récupère les datas des photographes
+  // Get all photographers
   const { photographers } = await getPhotographers()
   displayData(photographers)
-
+  // loading simulation
   setTimeout(() => {
     hideLoader()
   }, 2000)

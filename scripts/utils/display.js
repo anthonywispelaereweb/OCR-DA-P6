@@ -1,14 +1,13 @@
 const displayMessage = (message, querySelectorTarget, withLink = true, customClass = 'error-message') => {
   const target = document.querySelector(querySelectorTarget)
   let sectionMessage = document.createElement('section')
-  // target.innerHTML = ''
   sectionMessage.classList.add(customClass)
 
   sectionMessage.innerHTML = `<span>${message}</span>`
   if (withLink) {
     let link = document.createElement('a')
-    link.href= './index.html'
-    link.textContent = 'Retour à l\'accueil'
+    link.href = './index.html'
+    link.textContent = "Retour à l'accueil"
     sectionMessage.appendChild(link)
   }
   target.appendChild(sectionMessage)

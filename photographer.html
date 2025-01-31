@@ -27,27 +27,29 @@
         <h3>Trier par </h3>
         <div class="dropdownMenu">
             <div class="dropdownMenu-header">
-              <button class="dropdownMenu-header-select" aria-controls="filterOptions" aria-haspopup="listbox" aria-label="Trier par" onKeyDown="handleKeyDown(event)">
+              <button class="dropdownMenu-header-select" aria-controls="filterOptions" aria-haspopup="listbox" aria-label="Trier par">
                   <span>Popularité</span>
                   <i class="fa-solid fa-chevron-down"></i>
               </button>
             </div>
-            <datalist class="dropdownMenu-panel" id="filterOptions" aria-expanded="false">
-                <option class="dropdownMenu-panel-option" value="likes" data-value="likes" aria-selected="true" aria-label="Trier par popularité">Popularité</option>
-                <option class="dropdownMenu-panel-option" value="title" data-value="title" aria-selected="false" aria-label="Trier par titre" >Titre</>
-            </datalist>
+            <div class="dropdownMenu-panel" id="filterOptions" role="listbox">
+              <a tabindex="0" role="option" class="dropdownMenu-panel-option" value="likes" data-value="likes" aria-selected="true" aria-label="Trier par popularité">Popularité</a>
+              <a tabindex="0" role="option" class="dropdownMenu-panel-option" value="title" data-value="title" aria-selected="false" aria-label="Trier par titre" >Titre</a>
+            </a>
         </div>
     </section>
       <div class="photograph-galery"></div>
     </main>
     <div class="contact_modal hidden">
-      <div class="modal">
+      <dialog class="modal" aria-hidden="true" aria-modal="false">
         <header>
           <h2>Contactez-moi</h2>
-          <img src="./assets/icons/close.svg" id="closeModal" alt="fermer">
+          <button class="close-btn" type="button" id="closeModal">
+            <img src="./assets/icons/close.svg"  alt="fermer">
+          </button>
         </header>
-        <p class="name-photographer"></p>
-        <form class="modal-form" id="contact">
+        <p id="namePhotographer"></p>
+        <form class="modal-form" id="contact" >
           <label for="prenom">Prénom</label>
           <input class="firstName-inp" id="prenom" type="text" name="first-name" aria-label="Entrez votre prenom" aria-required="true">
           <span class="message-alert first-name-error">Vous devez entrer votre prénom !</span>
@@ -65,7 +67,7 @@
               Envoyer
           </button>
         </form>
-      </div>
+      </dialog>
     </div>
 
     <!-- lightbox modal -->

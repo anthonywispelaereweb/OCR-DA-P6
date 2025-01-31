@@ -1,5 +1,4 @@
 function mediaTemplate(data, name, indexElt, medias) {
-
   const getMediaCardDOM = () => {
     const { image, likes, id, photographerId, video } = data
     const card = document.createElement('article')
@@ -9,22 +8,32 @@ function mediaTemplate(data, name, indexElt, medias) {
 
     const linkButton = document.createElement('a')
     linkButton.classList.add('galery-item-link')
-    linkButton.role ="button"
+    linkButton.role = 'button'
     linkButton.title = data.title
     linkButton.ariaLabel = data.title
-    linkButton.setAttribute('tabindex',   1)     
     const pictureBase = `./assets/images/${name}/`
 
-    const supportMedia = document.createElement( image ? 'img' : 'video')
+    const supportMedia = document.createElement(image ? 'img' : 'video')
     supportMedia.src = `${pictureBase}${image ?? video}`
     supportMedia.alt = `${name} - ${data.title}`
     supportMedia.classList.add('galery-item-img')
     linkButton.appendChild(supportMedia)
+    linkButton.setAttribute('tabindex', 0)
 
     linkButton.addEventListener('click', () => {
       const lightbox = document.querySelector('.lightbox')
       lightbox.classList.toggle('hidden')
       initLightbox(indexElt, medias, pictureBase)
+      lightbox.addEventListener('keydown', e => {
+        if (e.code === 'Tab') initFocusLightbox(e)
+      })
+    })
+    linkButton.addEventListener('keydown', e => {
+      if (e.code === 'Enter') {
+        const lightbox = document.querySelector('.lightbox')
+        lightbox.classList.toggle('hidden')
+        initLightbox(indexElt, medias, pictureBase)
+      }
     })
 
     const cardFooter = document.createElement('div')
@@ -36,34 +45,35 @@ function mediaTemplate(data, name, indexElt, medias) {
 
     const likesContainer = document.createElement('div')
     likesContainer.classList.add('galery-item-likes')
+    likesContainer.setAttribute('tabindex', 0)
+
     likesContainer.dataset.likes = false
     const likesIcon = document.createElement('i')
     let localSessionLikes = JSON.parse(localStorage.getItem('likes')) ?? []
     let isExist = localSessionLikes.find(el => el?.name === name && el?.id.includes(id))
 
-    isExist 
-      ? likesContainer.dataset.likes = 'true' 
-      : likesContainer.dataset.likes = 'false'
-    likesContainer.dataset.likes === 'false' 
-      ? likesIcon.classList.add('far', 'fa-heart') 
-      : likesIcon.classList.add('fas', 'fa-heart')
+    isExist ? (likesContainer.dataset.likes = 'true') : (likesContainer.dataset.likes = 'false')
+    likesContainer.dataset.likes === 'false' ? likesIcon.classList.add('far', 'fa-heart') : likesIcon.classList.add('fas', 'fa-heart')
 
     likesIcon.setAttribute('aria-label', 'likes')
     const likesNumber = document.createElement('span')
     likesNumber.textContent = !isExist ? likes : likes + 1
     likesContainer.appendChild(likesNumber)
     likesContainer.appendChild(likesIcon)
-    likesContainer.addEventListener('click', () => {
+    const managerLike = () => {
       const globalLikesCounter = document.querySelector('.counter-likes')
       likesContainer.dataset.likes = likesContainer.dataset.likes === 'true' ? 'false' : 'true'
       likesIcon.classList = likesContainer.dataset.likes === 'true' ? 'fas fa-heart' : 'far fa-heart'
+      // Get liked items
       let localSessionLikes = JSON.parse(localStorage.getItem('likes')) ?? []
-  
-      if (likesContainer.dataset.likes === 'true') {
+
+      if (likesContainer.dataset.likes) {
         globalLikesCounter.textContent = parseInt(globalLikesCounter.textContent) + 1
         likesNumber.textContent = parseInt(likesNumber.textContent) + 1
-        localSessionLikes.find(el => el.name === name) ? localSessionLikes.find(el => el.name === name).id.push(id) :localSessionLikes.push({ name, id : [id] } )
-        
+        // Update liked items by autor
+        localSessionLikes.find(el => el.name === name)
+          ? localSessionLikes.find(el => el.name === name).id.push(id)
+          : localSessionLikes.push({ name, id: [id] })
         localStorage.setItem('likes', JSON.stringify(localSessionLikes))
       } else {
         globalLikesCounter.textContent = parseInt(globalLikesCounter.textContent) - 1
@@ -71,11 +81,19 @@ function mediaTemplate(data, name, indexElt, medias) {
         let isExist = localSessionLikes.find(el => el.name === name && el.id.includes(id))
         if (isExist) {
           localSessionLikes.map(el => {
-            if(el.name === name) el.id.splice(el.id.indexOf(id), 1)
+            if (el.name === name) el.id.splice(el.id.indexOf(id), 1)
           })
-        } 
+        }
         localStorage.setItem('likes', JSON.stringify(localSessionLikes))
-      }   
+      }
+    }
+    likesContainer.addEventListener('click', () => {
+      managerLike()
+    })
+    likesContainer.addEventListener('keydown', e => {
+      if (e.code === 'Enter') {
+        managerLike()
+      }
     })
 
     card.appendChild(linkButton)
@@ -86,6 +104,7 @@ function mediaTemplate(data, name, indexElt, medias) {
     return card
   }
 
+  const handleEventLike = () => {}
   const getCounterLikes = (price, name) => {
     const likes = medias.reduce((acc, media) => acc + media.likes, 0)
     const counter = document.createElement('div')
@@ -97,10 +116,9 @@ function mediaTemplate(data, name, indexElt, medias) {
       <span class="counter-likes">${likes + countLocalSessionLikes}</span> 
       <i class="fas fa-heart"></i>
      </div>
-     <span>${price}€/jour` 
+     <span>${price}€/jour`
     return counter
   }
-  
 
   return { getMediaCardDOM, getCounterLikes }
 }
