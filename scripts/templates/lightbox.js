@@ -24,6 +24,7 @@ const initLightbox = (indexElt, medias, pictureBase) => {
   let currentMedia = list.querySelector(`[data-id="${current}"]`)
   currentMedia.classList.remove('hidden')
   currentMedia.classList.add('active')
+  currentMedia.setAttribute('tabindex', 0)
   currentMedia.setAttribute('aria-hidden', false)
 }
 let focusableSelectorLightbox = 'button'

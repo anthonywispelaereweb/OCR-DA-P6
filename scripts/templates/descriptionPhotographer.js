@@ -10,7 +10,7 @@ const descriptionPhotographerTemplate = data => {
 
     const divLeft = document.createElement('div')
     divLeft.classList.add('div-left')
-    const namePhotographer = document.createElement('h2')
+    const namePhotographer = document.createElement('h1')
     namePhotographer.textContent = name
 
     const adressP = document.createElement('p')

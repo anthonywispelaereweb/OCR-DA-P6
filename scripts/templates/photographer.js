@@ -7,6 +7,7 @@ function photographerTemplate(data) {
     const article = document.createElement('article')
     const img = document.createElement('img')
     img.setAttribute('src', picture)
+    img.alt = `Eouvres de ${name}`
     const namePhotographer = document.createElement('h2')
     namePhotographer.textContent = name
     const adressP = document.createElement('p')
