@@ -1,3 +1,7 @@
+import { getData } from './../utils/api.js'
+import { hideLoader } from './../utils/display.js'
+import { photographerTemplate } from './../templates/photographer.js'
+
 async function getPhotographers() {
   let photographers = await getData('./data/photographers.json')
   return {

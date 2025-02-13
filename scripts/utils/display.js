@@ -22,3 +22,4 @@ const hideLoader = () => {
   const loader = document.querySelector('.loader-ctn')
   loader.classList.add('hidden')
 }
+export { displayMessage, showLoader, hideLoader }

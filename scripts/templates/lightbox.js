@@ -40,3 +40,5 @@ const initFocusLightbox = (e) => {
   if (index > 0) index = focusablesLightbox.length -1
   focusablesLightbox[index].focus()
 }
+
+export { initLightbox, initFocusLightbox }

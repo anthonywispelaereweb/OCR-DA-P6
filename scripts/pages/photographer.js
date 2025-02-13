@@ -1,9 +1,8 @@
+import { getPhotographersAndMediaById } from './../utils/api.js'
+import { hideLoader, displayMessage } from './../utils/display.js'
+import { descriptionPhotographerTemplate } from './../templates/descriptionPhotographer.js'
 // Get info of current photographer by Id
 const getDescriptionPhotographer = async id => await getPhotographersAndMediaById('./data/photographers.json', id)
-
-// Init behavior focus selector
-let focusableSelectorFilter = '.dropdownMenu-panel-option'
-let focusablesFilter = []
 
 const initFocusFilter = e => {
   if (e.code === 'Enter') e.target.click()
@@ -63,7 +62,7 @@ const updateMedias = medias => {
   mediaSection.appendChild(newMediaCardDOM)
 }
 
-const displayDataDescription = (photographerInfo, idUser) => {
+const displayDataDescription = (photographerInfo) => {
   const photographersHeader = document.querySelector('.photograph-header')
   const mediaSection = document.querySelector('.photograph-galery')
 
@@ -97,7 +96,7 @@ const init = async () => {
   const globalInfo = await getDescriptionPhotographer(idPhotographer)
   if (globalInfo) {
     const sortedMadias = sortMedias(globalInfo)
-    displayDataDescription(sortedMadias, idPhotographer)
+    displayDataDescription(sortedMadias)
 
     hideLoader()
     // Add focus on first article

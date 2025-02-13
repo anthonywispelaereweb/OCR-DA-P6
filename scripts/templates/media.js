@@ -1,3 +1,5 @@
+import { initLightbox, initFocusLightbox } from './../templates/lightbox.js'
+
 function mediaTemplate(data, name, indexElt, medias) {
   const getMediaCardDOM = () => {
     const { image, likes, id, photographerId, video } = data
@@ -51,8 +53,7 @@ function mediaTemplate(data, name, indexElt, medias) {
     const likesIcon = document.createElement('i')
     let localSessionLikes = JSON.parse(localStorage.getItem('likes')) ?? []
     let isExist = localSessionLikes.find(el => el?.name === name && el?.id.includes(id))
-
-    isExist ? (likesContainer.dataset.likes = 'true') : (likesContainer.dataset.likes = 'false')
+    likesContainer.dataset.likes = isExist ? 'true' : 'false'
     likesContainer.dataset.likes === 'false' ? likesIcon.classList.add('far', 'fa-heart') : likesIcon.classList.add('fas', 'fa-heart')
 
     likesIcon.setAttribute('aria-label', 'likes')
@@ -66,8 +67,9 @@ function mediaTemplate(data, name, indexElt, medias) {
       likesIcon.classList = likesContainer.dataset.likes === 'true' ? 'fas fa-heart' : 'far fa-heart'
       // Get liked items
       let localSessionLikes = JSON.parse(localStorage.getItem('likes')) ?? []
-
-      if (likesContainer.dataset.likes) {
+      console.log('likesContainer.dataset.likes')
+      if (likesContainer.dataset.likes === 'true') {
+        console.log('likesContainer.dataset.likes is true')
         globalLikesCounter.textContent = parseInt(globalLikesCounter.textContent) + 1
         likesNumber.textContent = parseInt(likesNumber.textContent) + 1
         // Update liked items by autor
@@ -76,6 +78,8 @@ function mediaTemplate(data, name, indexElt, medias) {
           : localSessionLikes.push({ name, id: [id] })
         localStorage.setItem('likes', JSON.stringify(localSessionLikes))
       } else {
+        console.log('likesContainer.dataset.likes is false')
+
         globalLikesCounter.textContent = parseInt(globalLikesCounter.textContent) - 1
         likesNumber.textContent = parseInt(likesNumber.textContent) - 1
         let isExist = localSessionLikes.find(el => el.name === name && el.id.includes(id))
@@ -104,7 +108,6 @@ function mediaTemplate(data, name, indexElt, medias) {
     return card
   }
 
-  const handleEventLike = () => {}
   const getCounterLikes = (price, name) => {
     const likes = medias.reduce((acc, media) => acc + media.likes, 0)
     const counter = document.createElement('div')
@@ -122,3 +125,5 @@ function mediaTemplate(data, name, indexElt, medias) {
 
   return { getMediaCardDOM, getCounterLikes }
 }
+
+export { mediaTemplate }

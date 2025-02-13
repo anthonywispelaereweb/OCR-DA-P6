@@ -1,3 +1,5 @@
+import { postInfo } from './api.js'
+import { displayMessage } from './display.js'
 let modalElement = null
 const focusableSelector = 'button, a, input, textarea'
 let focusables = []
@@ -9,7 +11,7 @@ const displayModal = () => {
   dialogBox.setAttribute('aria-hidden', false)
   dialogBox.setAttribute('aria-modal', true)
   const namePhotographerModal = document.querySelector('#namePhotographer')
-  const namePhotographer = document.querySelector('.div-left h2').textContent
+  const namePhotographer = document.querySelector('.div-left h1').textContent
   dialogBox.setAttribute('aria-labelledBy', 'namePhotographer')
   namePhotographerModal.innerHTML = namePhotographer
   modal.classList.remove('hidden')
@@ -123,3 +125,4 @@ formSend.addEventListener('click', async e => {
     console.log('error')
   }
 })
+export { displayModal, closeModal, focusModal }

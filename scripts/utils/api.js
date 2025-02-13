@@ -53,3 +53,5 @@ const postInfo = async() => {
   }
   return isSuccess
 }
+
+export { getData, getPhotographersAndMediaById, postInfo }

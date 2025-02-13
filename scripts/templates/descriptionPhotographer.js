@@ -1,3 +1,5 @@
+import { mediaTemplate } from "./media.js"
+import { displayModal } from './../utils/contactForm.js'
 const descriptionPhotographerTemplate = data => {
   if (!data.photographer) return
   const { name, portrait, city, country, tagline, price } = data.photographer
@@ -109,8 +111,7 @@ const descriptionPhotographerTemplate = data => {
         lightbox.classList.add('hidden')
         list.innerHTML = ''
         // Add focus on first article
-        const firstArticles = document.querySelector('.galery .galery-item-link')
-        if (firstArticles) firstArticles.focus()
+        if (document.querySelector('.galery .galery-item-link')) document.querySelector('.galery .galery-item-link').focus()
         break
       default:
         break
@@ -155,3 +156,5 @@ const descriptionPhotographerTemplate = data => {
 
   return { getDescriptionPhotographerCardDOM, getMediaPhotographerCardDom, getCounterMediaCardDom, initEventLightBox }
 }
+
+export { descriptionPhotographerTemplate }

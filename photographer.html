@@ -25,6 +25,7 @@
       <div class="photograph-header"></div>
       <section class="photograph-filter filter">
         <h2>Trier par </h2>
+        
         <div class="dropdownMenu">
             <div class="dropdownMenu-header">
               <button class="dropdownMenu-header-select" aria-controls="filterOptions" aria-haspopup="listbox" aria-label="Trier par">
@@ -33,8 +34,8 @@
               </button>
             </div>
             <div class="dropdownMenu-panel" id="filterOptions" role="listbox">
-              <a tabindex="0" role="option" class="dropdownMenu-panel-option" value="likes" data-value="likes" aria-selected="true" aria-label="Trier par popularité">Popularité</a>
-              <a tabindex="0" role="option" class="dropdownMenu-panel-option" value="title" data-value="title" aria-selected="false" aria-label="Trier par titre" >Titre</a>
+              <a tabindex="0" role="option" class="dropdownMenu-panel-option" data-value="likes" aria-selected="true" aria-label="Trier par popularité">Popularité</a>
+              <a tabindex="0" role="option" class="dropdownMenu-panel-option" data-value="title" aria-selected="false" aria-label="Trier par titre" >Titre</a>
             </a>
         </div>
     </section>
@@ -91,12 +92,6 @@
     <section class="loader-ctn">
       <div class="loader"></div>
     </section>
-    <script src="./scripts/utils/display.js"></script>
-    <script src="./scripts/utils/api.js"></script>
-    <script src="./scripts/templates/lightbox.js"></script>
-    <script src="./scripts/templates/descriptionPhotographer.js"></script>
-    <script src="./scripts/templates/media.js"></script>
-    <script src="./scripts/pages/photographer.js"></script>
-    <script src="./scripts/utils/contactForm.js"></script>
+    <script type="module" src="./scripts/pages/photographer.js"></script>
   </body>
 </html>
