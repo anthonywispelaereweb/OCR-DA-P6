@@ -67,9 +67,7 @@ function mediaTemplate(data, name, indexElt, medias) {
       likesIcon.classList = likesContainer.dataset.likes === 'true' ? 'fas fa-heart' : 'far fa-heart'
       // Get liked items
       let localSessionLikes = JSON.parse(localStorage.getItem('likes')) ?? []
-      console.log('likesContainer.dataset.likes')
       if (likesContainer.dataset.likes === 'true') {
-        console.log('likesContainer.dataset.likes is true')
         globalLikesCounter.textContent = parseInt(globalLikesCounter.textContent) + 1
         likesNumber.textContent = parseInt(likesNumber.textContent) + 1
         // Update liked items by autor
@@ -78,8 +76,6 @@ function mediaTemplate(data, name, indexElt, medias) {
           : localSessionLikes.push({ name, id: [id] })
         localStorage.setItem('likes', JSON.stringify(localSessionLikes))
       } else {
-        console.log('likesContainer.dataset.likes is false')
-
         globalLikesCounter.textContent = parseInt(globalLikesCounter.textContent) - 1
         likesNumber.textContent = parseInt(likesNumber.textContent) - 1
         let isExist = localSessionLikes.find(el => el.name === name && el.id.includes(id))

@@ -107,6 +107,15 @@ const descriptionPhotographerTemplate = data => {
       case 'ArrowUp':
         changeSlide(infosP, 'next')
         break
+      case 'Enter':
+        if (e.target.tagName === 'BUTTON' && e.target.classList.contains('close')) { 
+          lightbox.classList.add('hidden')
+          list.innerHTML = ''
+          // Add focus on first article
+          if (document.querySelector('.galery .galery-item-link')) document.querySelector('.galery .galery-item-link').focus()
+        }
+        break
+
       case 'Escape':
         lightbox.classList.add('hidden')
         list.innerHTML = ''
@@ -140,7 +149,9 @@ const descriptionPhotographerTemplate = data => {
       const firstArticles = document.querySelector('.galery .galery-item-link')
       if (firstArticles) firstArticles.focus()
     })
-
+    close.addEventListener('keydown', e => {
+      switchEvent(infosP.medias, e)
+    })
     lightbox.addEventListener('keydown', e => {
       switchEvent(infosP.medias, e)
     })

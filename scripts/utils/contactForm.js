@@ -1,5 +1,7 @@
-import { postInfo } from './api.js'
+import { postData } from './api.js'
 import { displayMessage } from './display.js'
+import { urlApi, formatedDateDay } from "./../config.js"
+
 let modalElement = null
 const focusableSelector = 'button, a, input, textarea'
 let focusables = []
@@ -50,14 +52,11 @@ form.addEventListener('keydown', e => {
 const focusModal = e => {
   e.preventDefault()
   let index = focusables.findIndex(f => f === modalElement.querySelector(':focus'))
-  console.log('🚀 ~ focusModal ~ index:', index)
-  console.log('🚀 ~ focusModal ~ focusables:', focusables)
   if (e.shiftKey) index--
   else index++
 
   if (index >= focusables.length) index = 0
   if (index < 0) index = focusables.length - 1
-  console.log('🚀 ~ focusModal ~  focusables[index]:', focusables[index])
   focusables[index].focus()
 }
 
@@ -88,7 +87,6 @@ const isValidInput = (name, value) => {
 const displayErrorForm = (name, error) => {
   if (error) {
     let itemError = document.querySelector(`.${name}-error`)
-    console.log('🚀 ~ displayErrorForm ~ itemError:', itemError)
     itemError.classList.add('show')
   } else {
     let itemError = document.querySelector(`.${name}-error`)
@@ -112,14 +110,14 @@ formSend.addEventListener('click', async e => {
     }
   })
   if (values.length === countValues) {
-    let sended = await postInfo()
+    let sended = await postData()
     if (sended) {
-      displayMessage('Message envoyé avec succès', '#contact', false, 'success-message')
+      displayMessage(`<p>Message envoyé avec succès. Consultable <a href="${urlApi}-${formatedDateDay()}">ici</a></p>`, '#contact', false, 'success-message')
       form.reset()
       setTimeout(() => {
         closeModal()
         document.querySelector('.success-message').classList.add('hidden')
-      }, 2000)
+      }, 10000)
     }
   } else {
     console.log('error')

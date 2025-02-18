@@ -1,3 +1,5 @@
+import { urlApi, formatedDateDay } from "./../config.js"
+
 const getData = async (url) => {
   try {
     const response = await fetch(url)
@@ -30,7 +32,7 @@ const getPhotographersAndMediaById = async (url, id) => {
     return error
   }
 } 
-const postInfo = async() => {
+const postData = async() => {
   let isSuccess= false
   const formHTML = document.querySelector('#contact')
   const formData = new FormData(formHTML)
@@ -38,6 +40,7 @@ const postInfo = async() => {
   formData.forEach((value, key) => {
     data[key] = value
   }) 
+  data.to = document.querySelector('#namePhotographer').textContent
   const options = {
     method: 'POST',
     headers: {
@@ -45,13 +48,18 @@ const postInfo = async() => {
     },
     body: JSON.stringify(data),
   }
-
-  const response = await fetch(`https://restapi.fr/api/OCR-test-tonio-fisheye`, options)
-  if (response.ok) {
-    console.log('🚀 ~ postInfo ~ response:', response)
-    isSuccess = true
+  try {
+    const dateDay = formatedDateDay()
+    const response = await fetch(`${urlApi}-${dateDay}`, options)
+    if (response.ok) {
+      console.log('🚀 ~ postData ~ response:', response)
+      isSuccess = response.ok
+    }
+  } catch (error) {
+    console.log('error', error)
   }
+  
   return isSuccess
 }
 
-export { getData, getPhotographersAndMediaById, postInfo }
+export { getData, getPhotographersAndMediaById, postData }

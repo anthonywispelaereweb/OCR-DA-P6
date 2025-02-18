@@ -36,9 +36,9 @@ const initFocusLightbox = (e) => {
   if(e.shiftKey) index--
   else index++
   
-  if (index >= focusablesLightbox.length) index = 0
-  if (index > 0) index = focusablesLightbox.length -1
-  focusablesLightbox[index].focus()
+  if (focusablesLightbox.length && index >= focusablesLightbox.length) index = 0
+  if (focusablesLightbox.length && index > 0) index = focusablesLightbox.length -1
+  if (focusablesLightbox[index]) focusablesLightbox[index].focus()
 }
 
 export { initLightbox, initFocusLightbox }
