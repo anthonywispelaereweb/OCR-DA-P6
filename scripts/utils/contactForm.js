@@ -112,7 +112,7 @@ formSend.addEventListener('click', async e => {
   if (values.length === countValues) {
     let sended = await postData()
     if (sended) {
-      displayMessage(`<p>Message envoyé avec succès. Consultable <a href="${urlApi}-${formatedDateDay()}">ici</a></p>`, '#contact', false, 'success-message')
+      displayMessage(`<p>Message envoyé avec succès. Consultable <a href="${urlApi}-${formatedDateDay()}" target="_blank" rel="noopener noreferrer">ici</a></p>`, '#contact', false, 'success-message')
       form.reset()
       setTimeout(() => {
         closeModal()
