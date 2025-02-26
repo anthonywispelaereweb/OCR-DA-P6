@@ -10,11 +10,11 @@
   background: #ffffff99;
 }
 .loader {
-  width: 40px;
+  width: 2.5rem;
   aspect-ratio: 1;
   color: #f03355;
   position: relative;
-  background: radial-gradient(10px,currentColor 94%,#0000);
+  background: radial-gradient(0.625rem,currentColor 94%,#0000);
 }
 .loader:before {
   content: '';
@@ -22,16 +22,16 @@
   inset: 0;
   border-radius: 50%;
   background:
-    radial-gradient(9px at bottom right,#0000 94%,currentColor) top    left,
-    radial-gradient(9px at bottom left ,#0000 94%,currentColor) top    right,
-    radial-gradient(9px at top    right,#0000 94%,currentColor) bottom left,
-    radial-gradient(9px at top    left ,#0000 94%,currentColor) bottom right;
-  background-size: 20px 20px;
+    radial-gradient(0.5625rem at bottom right,#0000 94%,currentColor) top left,
+    radial-gradient(0.5625rem at bottom left ,#0000 94%,currentColor) top right,
+    radial-gradient(0.5625rem at top right,#0000 94%,currentColor) bottom left,
+    radial-gradient(0.5625rem at top left ,#0000 94%,currentColor) bottom right;
+  background-size: 1.25rem 1.25rem;
   background-repeat: no-repeat;
   animation: l18 1.5s infinite cubic-bezier(0.3,1,0,1);
 }
 @keyframes l18 {
-   33%  {inset:-10px;transform: rotate(0deg)}
-   66%  {inset:-10px;transform: rotate(90deg)}
+   33%  {inset:-0.625rem;transform: rotate(0deg)}
+   66%  {inset:-0.625rem;transform: rotate(90deg)}
    100% {inset:0    ;transform: rotate(90deg)}
 }
