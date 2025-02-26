@@ -17,6 +17,8 @@ async function displayData(photographers) {
     const userCardDOM = photographerModel.getUserCardDOM()
     photographersSection.appendChild(userCardDOM)
   })
+  let firstArticle = photographersSection.querySelector('article')
+  firstArticle.focus()
 }
 
 async function init() {
