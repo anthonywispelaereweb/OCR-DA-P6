@@ -15,7 +15,7 @@
 .contact_modal #namePhotographer {
   width: 100%;
   text-align: left;
-  font-size: 64px;
+  font-size: 4rem;
   font-weight: 400;
   margin: 0;
 }
@@ -29,31 +29,33 @@
 .photograph-header {
   background-color: #fafafa;
   height: auto;
-  margin: 0 100px;
+  margin: 0 6.25rem;
 }
-
+.photograph-header .global-section {
+  align-items: center;
+}
 .contact_button {
-  font-size: 20px;
+  font-size: 1.25rem;
   font-weight: bold;
   color: white;
-  padding: 11px;
-  width: 170px;
-  height: 70px;
+  padding: 0.6875rem;
+  width: 10.625rem;
+  height: 4.375rem;
   border: none;
   background-color: #901c1c;
-  border-radius: 5px;
+  border-radius: 0.3125rem;
   cursor: pointer;
 }
 
 .modal {
-  border-radius: 5px;
+  border-radius: 0.3125rem;
   background-color: #db8876;
   width: 50%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  padding: 35px;
+  padding: 2.1875rem;
   max-height: 90vh;
   overflow-y: auto;
 }
@@ -68,7 +70,7 @@
 }
 
 .modal header h2 {
-  font-size: 64px;
+  font-size: 4rem;
   font-weight: normal;
   text-align: center;
 }
@@ -82,7 +84,7 @@ form {
 
 form label {
   color: #312e2e;
-  font-size: 36px;
+  font-size: 2.25rem;
 }
 
 form div {
@@ -90,18 +92,18 @@ form div {
   flex-direction: column;
   width: 100%;
   align-items: self-start;
-  margin-bottom: 26px;
+  margin-bottom: 1.625rem;
 }
 
 form input {
   width: 100%;
   height: 68px;
   border: none;
-  border-radius: 5px;
+  border-radius: 0.3125rem;
 }
 form textarea {
   width: 100%;
-  height: 150px;
+  height: 9.375rem;
   border: none;
   margin-bottom: 1rem;
 }
@@ -128,16 +130,16 @@ form textarea {
   }
   .modal header img {
     display: block;
-    width: 32px;
+    width: 2rem;
   }
   .modal header h2 {
-    font-size: 24px;
+    font-size: 1.5rem;
   }
   .contact_modal #namePhotographer {
-    font-size: 32px;
+    font-size: 2rem;
   }
   form label {
-    font-size: 24px;
+    font-size: 1.5rem;
   }
 }
 @media (width < 768px) {
@@ -145,7 +147,7 @@ form textarea {
     margin: 0;
   }
   .galery {
-    margin-top: 50px;
+    margin-top: 3.125rem;
   }
   .galery-item {
     width: 100%;
