@@ -5,6 +5,7 @@ function photographerTemplate(data) {
 
   function getUserCardDOM() {
     const article = document.createElement('article')
+    article.setAttribute('tabindex', 0)
     const img = document.createElement('img')
     img.setAttribute('src', picture)
     img.alt = `Eouvres de ${name}`
@@ -26,6 +27,11 @@ function photographerTemplate(data) {
     article.appendChild(priceP)
     article.addEventListener('click', () => {
       window.location.href = `photographer.html?id=${data.id}`
+    })
+    article.addEventListener('keydown', (e) => {
+      if(e.code === 'Enter') {
+        window.location.href = `photographer.html?id=${data.id}`
+      }
     })
     return article
   }
